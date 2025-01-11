@@ -1,19 +1,15 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function NotFoundPage() {
-  const navigate = useNavigate();
+  
 
   return (
     <>
       <h1>OOOPS pagina non trovata! Errore 404"</h1>
-      <button
-        onClick={() => {
-          navigate(-1);
-        }}
-      >
-        Ritorna indietro
-      </button>
-      <Link to="/">Home</Link>
+      <div className="d-flex m-3">
+        <Link to="/list-blogs" className="btn btn-success mx-2">List</Link> <br />
+        <Link to="/" className="btn btn-warning mx-2">Home</Link>
+      </div>
     </>
   );
 }

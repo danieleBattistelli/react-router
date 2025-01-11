@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
     const navLinks = [
@@ -6,7 +6,7 @@ function Navbar() {
             path: "/",
             title: "Home",
         },
-        
+
         {
             path: "/list-blogs",
             title: "List",
@@ -15,8 +15,8 @@ function Navbar() {
         {
             path: "/about",
             title: "AboutUs",
-        },
-        
+        }
+
     ];
 
     return (
