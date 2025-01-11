@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 
 const BlogList = ({ blogs, onDelete, onEdit }) => {
@@ -11,13 +12,16 @@ const BlogList = ({ blogs, onDelete, onEdit }) => {
             <h3>{blog.title}</h3>
             <p>{blog.content}</p>
             <p>Tags: {blog.tags.join(', ')}</p>
-            <div className="mx-2">
+            <div className="my-2">
               <button className="btn btn-warning" onClick={() => onEdit(blog)}>
                 Modifica
                 </button>
               <button className="btn btn-danger" onClick={() => onDelete(blog.id)}>
                 Elimina
               </button>
+              <Link className="btn btn-success" to={`/list-blogs/${blog.id}`}>
+            Dettagli
+          </Link>
             </div>
           </li>
         ))}

@@ -37,10 +37,13 @@ const ListPage = () => {
         <Link className="btn btn-primary" to="/list-blogs/create">
             Aggiungi un nuovo post
           </Link>
+          
         {blogs.length > 0 ?
           <BlogList blogs={blogs} onDelete={handleDelete} onEdit={setCurrentBlog} />
           : ''}
+          
       </div>
+  
     );
   };
   
