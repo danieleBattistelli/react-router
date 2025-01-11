@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import BlogList from './BlogList.jsx';
-import { Link } from "react-router-dom";
+import BlogList from './components/BlogList';
+import BlogForm from './components/BlogForm';
 
 
-const ListPage = () => {
+
+
+
+const AppCard = () => {
     const [blogs, setBlogs] = useState([]);
     const [currentBlog, setCurrentBlog] = useState(null);
   
@@ -33,10 +36,9 @@ const ListPage = () => {
     };
   
     return (
-      <div className="container mt-3">
-        <Link className="btn btn-primary" to="/list-blogs/create">
-            Aggiungi un nuovo post
-          </Link>
+      <div className="container mt-5">
+        <h1>Gestione Blog</h1>
+        <BlogForm blog={currentBlog} onSave={handleSave} />
         {blogs.length > 0 ?
           <BlogList blogs={blogs} onDelete={handleDelete} onEdit={setCurrentBlog} />
           : ''}
@@ -44,4 +46,4 @@ const ListPage = () => {
     );
   };
   
-  export default ListPage;
+  export default AppCard;

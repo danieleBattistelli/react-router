@@ -4,7 +4,7 @@ import { FaTrash } from 'react-icons/fa';
 
 const BlogItem = ({ blog, onDelete }) => {
     return (
-        <li className="list-group-item d-flex justify-content-between align-items-center">
+        <li className="d-flex flex-wrap ">
             <div>
                 <h5>{blog.title}</h5>
                 <p>ID: {blog.id}</p>               

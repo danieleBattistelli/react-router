@@ -1,46 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import BlogList from './components/BlogList';
-import BlogForm from './components/BlogForm';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import AdminLayout from "./components/layout/AdminLayout";
+import DashboardPage from "./pages/DashboardPage";
+import ListPage from "./pages/blogs/ListPage";
+import CreatePage from "./pages/blogs/CreatePage";
+import ShowPage from "./pages/blogs/ShowPage";
+import NotFoundPage from "./pages/NotFoundPage";
+import AboutUsPage from "./pages/AboutUsPage"
 
-
-const App = () => {
-  const [blogs, setBlogs] = useState([]);
-  const [currentBlog, setCurrentBlog] = useState(null);
-
-  useEffect(() => {
-    fetchBlogs();
-  }, []);
-
-  const fetchBlogs = async () => {
-    const response = await axios.get('http://localhost:3000/posts/');
-    setBlogs(response.data.data);
-  };
-
-  const handleDelete = async (id) => {
-    await axios.delete(`http://localhost:3000/posts/${id}`);
-    fetchBlogs();
-  };
-
-  const handleSave = async (blog) => {
-    if (blog.id) {
-      await axios.put(`http://localhost:3000/posts/${blog.id}`, blog);
-    } else {
-      await axios.post('http://localhost:3000/posts/', blog);
-    }
-    setCurrentBlog(null);
-    fetchBlogs();
-  };
-
+function App() {
   return (
-    <div className="container mt-5">
-      <h1>Gestione Blog</h1>
-      <BlogForm blog={currentBlog} onSave={handleSave} />
-      {blogs.length > 0 ?
-        <BlogList blogs={blogs} onDelete={handleDelete} onEdit={setCurrentBlog} />
-        : ''}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route element={<AdminLayout />}>
+          <Route index element={<DashboardPage />} />
+          <Route path="/list-blogs">
+            <Route index element={<ListPage />} />
+            <Route path="create" element={<CreatePage />} />
+            <Route path=":id" element={<ShowPage />} />
+          </Route>
+          <Route path="/about" index element={<AboutUsPage />} ></Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   );
-};
+}
 
 export default App;
